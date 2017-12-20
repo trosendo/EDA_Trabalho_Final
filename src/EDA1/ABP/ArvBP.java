@@ -177,14 +177,44 @@ public class ArvBP<T extends Comparable<? super T>> implements Iterable<T>, ABP<
         printInOrder(node.right);
     }
 
-    @Override
-    public void printPostOrder() {
 
+    private void printPostOrder(ABPNode<T> node) {
+        if (node == null)
+            return;
+
+        // first recur on left subtree
+        printPostOrder(node.left);
+
+        // then recur on right subtree
+        printPostOrder(node.right);
+
+        // now deal with the node
+        System.out.print(node.element + " ");
+    }
+
+    @Override
+    public void printPostOrder(){
+        printPostOrder(root);
     }
 
     @Override
     public void printPreOrder() {
+        printPreOrder(root);
+    }
 
+    private void printPreOrder(ABPNode<T> node)
+    {
+        if (node == null)
+            return;
+
+        /* first print data of node */
+        System.out.print(node.element + " ");
+
+        /* then recur on left sutree */
+        printPreOrder(node.left);
+
+        /* now recur on right subtree */
+        printPreOrder(node.right);
     }
 
     @Override
