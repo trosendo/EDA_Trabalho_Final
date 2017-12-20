@@ -1,10 +1,14 @@
-package EDA1.ABP;
+import EDA1.AVL.ArvVL;
 
 public class Tester {
     public static void main(String[] args){
 
+        ArvVL<String> avl = new ArvVL<>();
+        avl.insert("gla");
 
-        Phonebook phonebook = new Phonebook(new Contact("António", "911111111"));
+        System.out.println(avl.treeHeight());
+
+        /*Phonebook phonebook = new Phonebook(new Contact("António", "911111111"));
         Contact temp = new Contact("António", "123456789");
         temp.addNumber("987654321");
         temp.addNumber("123987456");
@@ -24,6 +28,6 @@ public class Tester {
         //System.out.println("\nInorder traversal of binary tree is ");
         //System.out.println("The maximum value of BST is " + tree.findMin());
         //tree.findMin().getNumbers();
-
+*/
     }
 }

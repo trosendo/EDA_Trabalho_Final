@@ -1,4 +1,4 @@
-package EDA1.ABP;
+import EDA1.ABP.ArvBP;
 
 public class Contact implements Comparable<Contact> {
     String name;
