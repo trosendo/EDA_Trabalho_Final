@@ -125,27 +125,21 @@ public class ArvBP<T extends Comparable<? super T>> implements Iterable<T>, ABP<
     private ABPNode<T> remove(T x, ABPNode<T> n){
         if(n == null)
             return null;
-
         if(x.compareTo(n.element) == 0){     // if(x == n.element)
             // n is the node to be removed
-            if(n.left == null && n.right == null){
+            if(n.left == null && n.right == null)
                return null;
-            }
 
-            if(n.left == null){
+            if(n.left == null)
                return n.right;
-            }
 
-            if(n.right == null){
+            if(n.right == null)
                return n.left;
-            }
-
             /*
             if the code gets here then the node n has 2 children.
             find the smallest node by reading the most left
             child of the right subtree.
             */
-
             ABPNode<T> smallestNode = findMin(n.right);
 
             n.element = smallestNode.element;
@@ -219,7 +213,7 @@ public class ArvBP<T extends Comparable<? super T>> implements Iterable<T>, ABP<
 
     @Override
     public Iterator<T> iterator() {
-        return new ABPIterator<>(root, size);
+        return new ABPIteratorPostOrder<>(root, size);
     }
 
     public int getSize(){

@@ -2,11 +2,11 @@ package EDA1.ABP;
 
 import EDA1.Stack.*;
 
-public class ABPIterator<T> implements java.util.Iterator<T> {
+public class ABPIteratorPostOrder<T> implements java.util.Iterator<T> {
     ABPNode<T> node;
     Stack<ABPNode<T>> stack;
 
-    ABPIterator(ABPNode<T> node, int BSTSize){
+    public ABPIteratorPostOrder(ABPNode<T> node, int BSTSize){
         this.node = node;
         stack = new ArrayStack<>(BSTSize);
         populateStack(stack, this.node);
