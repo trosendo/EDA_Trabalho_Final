@@ -1,12 +1,23 @@
+import EDA1.ABP.ArvBP;
 import EDA1.AVL.ArvVL;
 
 public class Tester {
     public static void main(String[] args){
 
-        ArvVL<String> avl = new ArvVL<>();
-        avl.insert("gla");
+        ArvVL<Integer> avl = new ArvVL<>();
+        avl.insert(20);
+        avl.insert(10);
+        avl.insert(40);
+        avl.insert(5);
+        avl.insert(15);
+        avl.insert(30);
+        avl.insert(50);
+        avl.insert(3);
+        avl.insert(4);
 
-        System.out.println(avl.treeHeight());
+        //System.out.println(avl.isBalanced(avl.getRoot()));
+        avl.printPostOrder();
+
 
         /*Phonebook phonebook = new Phonebook(new Contact("António", "911111111"));
         Contact temp = new Contact("António", "123456789");
