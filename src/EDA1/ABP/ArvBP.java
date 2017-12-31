@@ -118,43 +118,30 @@ public class ArvBP<T extends Comparable<? super T>> implements Iterable<T>, ABP<
 
     @Override
     public void remove(T x) {
-        size--;
-        root = remove(x, root);
+        if(!isEmpty()) {
+            if(contains(x)) {
+                size--;
+                root = remove(x, root);
+            }
+        }
     }
 
-    private ABPNode<T> remove(T x, ABPNode<T> n){
-        if(n == null)
-            return null;
-        if(x.compareTo(n.element) == 0){     // if(x == n.element)
-            // n is the node to be removed
-            if(n.left == null && n.right == null)
-               return null;
-
-            if(n.left == null)
-               return n.right;
-
-            if(n.right == null)
-               return n.left;
-            /*
-            if the code gets here then the node n has 2 children.
-            find the smallest node by reading the most left
-            child of the right subtree.
-            */
-            ABPNode<T> smallestNode = findMin(n.right);
-
-            n.element = smallestNode.element;
-            n.right = smallestNode.right;
-
-            n.right = remove(smallestNode.element, n.right);
-
-            return n;
-        } else if(x.compareTo(n.element) < 0){ // if(x < n.element)
+    @SuppressWarnings("Duplicates")
+    private ABPNode<T> remove(T x, ABPNode<T> n) {
+        if (n.element.compareTo(x) < 0) {
+            n.right = remove(x, n.right);
+        } else if (n.element.compareTo(x) > 0) {
             n.left = remove(x, n.left);
-            return n;
+        } else if (n.left != null && n.right != null) { //caso de haver dois filhos
+            ABPNode<T> min = findMin(n.right);
+            n.element = min.element;
+            n.right = remove(min.element, n.right);
+        } else if (n.left == null) {
+            n = n.right;
         } else {
-            n.right = remove(x, n.left);
-            return n;
+            n = n.left;
         }
+        return n;
     }
 
     @Override
