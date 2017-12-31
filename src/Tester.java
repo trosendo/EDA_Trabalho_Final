@@ -5,15 +5,21 @@ public class Tester {
     public static void main(String[] args){
 
         ArvVL<Integer> avl = new ArvVL<>();
-        avl.insert(20);
-        avl.insert(10);
-        avl.insert(40);
-        avl.insert(5);
-        avl.insert(15);
         avl.insert(30);
-        avl.insert(50);
-        avl.insert(3);
-        avl.insert(4);
+        avl.insert(20);
+        avl.insert(7);
+        avl.insert(15);
+        //avl.insert(15);
+        avl.insert(12);
+        avl.insert(8);
+        avl.insert(10);
+        avl.insert(25);
+        avl.insert(28);
+        avl.insert(29);
+
+        avl.remove(30);
+
+        avl.insert(13);
 
         //System.out.println(avl.isBalanced(avl.getRoot()));
         avl.printPostOrder();
@@ -41,4 +47,6 @@ public class Tester {
         //tree.findMin().getNumbers();
 */
     }
+
+
 }
