@@ -12,8 +12,8 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
         size = 1;
     }
 
-    public ArvVL(AVLNode<T> r) {
-        root = r;
+    public ArvVL(AVLNode<T> x) {
+        root = x;
         size = 0;
     }
 
@@ -22,8 +22,8 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
         size = 0;
     }
 
-    public ArvVL(T r, AVLNode<T> e, AVLNode<T> d) {
-        root = new AVLNode<>(r, e, d);
+    public ArvVL(T x, AVLNode<T> left, AVLNode<T> right) {
+        root = new AVLNode<>(x, left, right);
         size = 3;
     }
 
@@ -100,19 +100,19 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
         int balance = getBalance(n);
 
         //UNBALANCED PATH: LEFT, LEFT
-        if(balance > 1 && x.compareTo(n.left.element) < 0)
+        if (balance > 1 && x.compareTo(n.left.element) < 0)
             return simpleRightRotation(n);
 
         //UNBALANCED PATH: RIGHT, RIGHT
-        if(balance < -1 && x.compareTo(n.right.element) > 0)
+        if (balance < -1 && x.compareTo(n.right.element) > 0)
             return simpleLeftRotation(n);
 
         //UNBALANCED PATH: LEFT, RIGHT
-        if(balance > 1 && x.compareTo(n.left.element) > 0)
+        if (balance > 1 && x.compareTo(n.left.element) > 0)
             return leftRightRotation(n);
 
         //UNBALANCED PATH: RIGHT, LEFT
-        if(balance < -1 && x.compareTo(n.right.element) < 0)
+        if (balance < -1 && x.compareTo(n.right.element) < 0)
             return rightLeftRotation(n);
 
         return n;
@@ -129,10 +129,9 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
         }
     }
 
-    @SuppressWarnings("Duplicates")
     private AVLNode<T> remove(T x, AVLNode<T> n) {
 
-        if(n == null)
+        if (n == null)
             return n;
 
         if (x.compareTo(n.element) < 0) {
@@ -141,20 +140,20 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
             n.right = remove(x, n.right);
         } else {
             //Node with one or no child
-            if(n.left == null || n.right == null){
+            if (n.left == null || n.right == null) {
                 AVLNode<T> temp = null;
-                if(temp == n.left)
+                if (temp == n.left)
                     temp = n.right;
                 else
                     temp = n.left;
 
                 //No child case
-                if(temp == null){
+                if (temp == null) {
                     temp = n;
                     n = null;
-                }else //One child case
+                } else //One child case
                     n = temp;
-            }else{
+            } else {
                 //Node with two children
                 //find the smallest node in the right subtree
                 AVLNode<T> temp = findMin(n.right);
@@ -165,7 +164,7 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
             }
         }
 
-        if(n == null)
+        if (n == null)
             return n;
 
         n.height = Math.max(height(n.left), height(n.right)) + 1;
@@ -195,21 +194,18 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
 
     @Override
     public void printInOrder() {
-
+        printInOrder(root);
     }
 
-    private void printPostOrder(AVLNode<T> node) {
-        if (node == null)
+    private void printInOrder(AVLNode<T> n) {
+        if (n == null)
             return;
 
-        // first recur on left subtree
-        printPostOrder(node.left);
+        printInOrder(n.left);
 
-        // then recur on right subtree
-        printPostOrder(node.right);
+        System.out.print(n.element + " ");
 
-        // now deal with the node
-        System.out.print(node.element + " ");
+        printInOrder(n.right);
     }
 
     @Override
@@ -217,9 +213,31 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
         printPostOrder(root);
     }
 
+    private void printPostOrder(AVLNode<T> n) {
+        if (n == null)
+            return;
+
+        printPostOrder(n.left);
+
+        printPostOrder(n.right);
+
+        System.out.print(n.element + " ");
+    }
+
     @Override
     public void printPreOrder() {
+        printPreOrder(root);
+    }
 
+    private void printPreOrder(AVLNode<T> n) {
+        if (n == null)
+            return;
+
+        System.out.print(n.element + " ");
+
+        printPreOrder(n.left);
+
+        printPreOrder(n.right);
     }
 
     @Override

@@ -22,32 +22,14 @@ public class ArvBP<T extends Comparable<? super T>> implements Iterable<T>, ABP<
         size = 0;
     }
 
-    public ArvBP(T r, ABPNode<T> e, ABPNode<T> d) {
-        root = new ABPNode<>(r, e, d);
+    public ArvBP(T root, ABPNode<T> left, ABPNode<T> right) {
+        this.root = new ABPNode<>(root, left, right);
         size = 3;
     }
 
     @Override
     public boolean isEmpty() {
         return root == null;
-    }
-
-    private T getElement(T x) {
-        return getElement(x, root);
-    }
-
-    private T getElement(T x, ABPNode<T> node){
-        if(node == null)
-            return null;
-
-        if(node.element.compareTo(x) == 0)
-            return node.element;
-
-        if(node.element.compareTo(x) > 0)
-            return getElement(x, node.left);
-        else
-            return getElement(x, node.right);
-
     }
 
     @Override
@@ -126,7 +108,6 @@ public class ArvBP<T extends Comparable<? super T>> implements Iterable<T>, ABP<
         }
     }
 
-    @SuppressWarnings("Duplicates")
     private ABPNode<T> remove(T x, ABPNode<T> n) {
         if (n.element.compareTo(x) < 0) {
             n.right = remove(x, n.right);
@@ -149,33 +130,32 @@ public class ArvBP<T extends Comparable<? super T>> implements Iterable<T>, ABP<
         printInOrder(root);
     }
 
-    private void printInOrder(ABPNode<T> node){ //RETURN STRING WITH PRINTED ELEMENTS!!
-        if(node == null)
+    private void printInOrder(ABPNode<T> n){
+        if(n == null)
             return;
 
-        printInOrder(node.left);
-        System.out.println("-> " + node.element);
-        printInOrder(node.right);
+        printInOrder(n.left);
+
+        System.out.print(n.element + " ");
+
+        printInOrder(n.right);
     }
 
-
-    private void printPostOrder(ABPNode<T> node) {
-        if (node == null)
-            return;
-
-        // first recur on left subtree
-        printPostOrder(node.left);
-
-        // then recur on right subtree
-        printPostOrder(node.right);
-
-        // now deal with the node
-        System.out.print(node.element + " ");
-    }
 
     @Override
     public void printPostOrder(){
         printPostOrder(root);
+    }
+
+    private void printPostOrder(ABPNode<T> n) {
+        if (n == null)
+            return;
+
+        printPostOrder(n.left);
+
+        printPostOrder(n.right);
+
+        System.out.print(n.element + " ");
     }
 
     @Override
@@ -183,19 +163,16 @@ public class ArvBP<T extends Comparable<? super T>> implements Iterable<T>, ABP<
         printPreOrder(root);
     }
 
-    private void printPreOrder(ABPNode<T> node)
+    private void printPreOrder(ABPNode<T> n)
     {
-        if (node == null)
+        if (n == null)
             return;
 
-        /* first print data of node */
-        System.out.print(node.element + " ");
+        System.out.print(n.element + " ");
 
-        /* then recur on left sutree */
-        printPreOrder(node.left);
+        printPreOrder(n.left);
 
-        /* now recur on right subtree */
-        printPreOrder(node.right);
+        printPreOrder(n.right);
     }
 
     @Override
@@ -203,7 +180,25 @@ public class ArvBP<T extends Comparable<? super T>> implements Iterable<T>, ABP<
         return new ABPIteratorPostOrder<>(root, size);
     }
 
-    public int getSize(){
-        return size;
+    /*private T getElement(T x) {
+        return getElement(x, root);
     }
+
+    private T getElement(T x, ABPNode<T> n){
+        if(n == null)
+            return null;
+
+        if(n.element.compareTo(x) == 0)
+            return n.element;
+
+        if(n.element.compareTo(x) > 0)
+            return getElement(x, n.left);
+        else
+            return getElement(x, n.right);
+
+    }*/
+
+    /*private int getSize(){
+        return size;
+    }*/
 }
