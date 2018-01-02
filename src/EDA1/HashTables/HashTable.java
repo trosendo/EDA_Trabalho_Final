@@ -62,10 +62,11 @@ public abstract class HashTable<T> {
         int index = procPos(x);
         arr[index] = new Elemento<>(x);
         nElementos++;
-        System.out.println("\tINSERTED: " + x.toString());
+        System.out.println("\tINSERTED: " + x.toString() + " IN INDEX " + index + "\n\t\tFactor Carga = " + fatorCarga());
         if(fatorCarga() >= 0.5){
             System.out.println("\t\tREHASING!");
             rehash();
+            System.out.println("\t\tREHASING DONE!");
         }
     }
 
