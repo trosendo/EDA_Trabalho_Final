@@ -3,7 +3,7 @@ package EDA1.HashTables;
 public abstract class HashTable<T> {
 
     Elemento<T>[] arr;
-    int nElementos;
+    private int nElementos;
 
     public HashTable() {
         alocarTabela(23);
@@ -20,18 +20,18 @@ public abstract class HashTable<T> {
         return nElementos;
     }
 
-    public float fatorCarga() {
+    private float fatorCarga() {
         return ((float) nElementos / (float) arr.length);
     }
 
     protected abstract int procPos(T s);    //retornará a posição em que s será inserido ou se s existe a sua localização na tabela
 
-    public void alocarTabela(int dim) {     //uma nova tabela de dimensão especificada
+    private void alocarTabela(int dim) {     //uma nova tabela de dimensão especificada
         arr = (Elemento<T>[]) new Elemento[dim];
         nElementos = 0;
     }
 
-    public void tornarVazia(){              //esvazia a tabela em uso;
+    private void tornarVazia(){              //esvazia a tabela em uso;
         alocarTabela(arr.length);
     }
 
@@ -47,37 +47,36 @@ public abstract class HashTable<T> {
 
     public void remove(T x) {
         if(procurar(x) != null) {
-            System.out.println("DELETED: " + arr[procPos(x)].getElemento());
+            //System.out.println("DELETED: " + arr[procPos(x)].getElemento());
             arr[procPos(x)].remove();
             nElementos--;
         }
     }
 
     public void insere(T x) {
-        System.out.println("TO INSERT: " + x.toString());
+        //System.out.println("TO INSERT: " + x.toString());
         if(procurar(x) != null) {
-            System.out.println("\t" + x.toString() + " ALREADY IN HASHTABLE");
+            //System.out.println("\t" + x.toString() + " ALREADY IN HASHTABLE");
             return;
         }
         int index = procPos(x);
         arr[index] = new Elemento<>(x);
         nElementos++;
-        System.out.println("\tINSERTED: " + x.toString() + " IN INDEX " + index + "\n\t\tFactor Carga = " + fatorCarga());
+        //System.out.println("\tINSERTED: " + x.toString() + " IN INDEX " + index + "\n\t\tFactor Carga = " + fatorCarga());
         if(fatorCarga() >= 0.5){
-            System.out.println("\t\tREHASING!");
+            //System.out.println("\t\tREHASING!");
             rehash();
-            System.out.println("\t\tREHASING DONE!");
+            //System.out.println("\t\tREHASING DONE!");
         }
     }
 
-    public void rehash() {
+    private void rehash() {
         int dim = getPrime(arr.length * 2);
         Elemento<T>[] arrTemp1 = arr.clone();
         int c = 0;
         alocarTabela(dim);
         while(c < arrTemp1.length){
             if(arrTemp1[c] != null && arrTemp1[c].isAtivo()) {
-                //System.out.println("\t\t\tREHASH INDEX: " + c);
                 insere(arrTemp1[c].getElemento());
             }
             c++;
@@ -86,12 +85,12 @@ public abstract class HashTable<T> {
     }
 
     public void print() {
-        System.out.println("Index -> Object: Active");
+        System.out.println("Index -> Object: Status");
         for(int i = 0; i < arr.length; i++){
             if(arr[i] != null)
-                System.out.printf("%d -> %s: %s\n", i, arr[i].getElemento(), arr[i].isAtivo());
+                System.out.printf("%d -> %s: %s\n", i, arr[i].getElemento(), arr[i].isAtivo() ? "Active" : "Inactive");
             else
-                System.out.printf("%d -> %s: %s\n", i, arr[i], "false");
+                System.out.printf("%d -> %s: %s\n", i, arr[i], "Inactive");
         }
     }
 
