@@ -35,7 +35,7 @@ public abstract class HashTable<T> {
         alocarTabela(arr.length);
     }
 
-    public T procurar(T x) {                //retorna o elemento que esta na tabela , se x não está lá retorna null
+    public T procurar(T x) {                //retorna o elemento que esta na tabela , se x não está lá ou está inativo retorna null
         int index = procPos(x);
         if(arr[index] == null)
             return null;

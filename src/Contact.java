@@ -1,37 +1,50 @@
-import EDA1.ABP.ArvBP;
+import EDA1.AVL.*;
 
 public class Contact implements Comparable<Contact> {
     String name;
-    ArvBP<String> phoneNumbers;
+    AVL<String> phoneNumbers;
 
-    Contact(String name, String phoneNumber){
+    Contact(String name, String phoneNumber) {
         this.name = name;
-        phoneNumbers = new ArvBP<>(phoneNumber);
-    }
-    Contact(String name){
-        this.name = name;
-        phoneNumbers = new ArvBP<>();
+        phoneNumbers = new ArvVL<>(phoneNumber);
     }
 
-    public void addNumber(String number){
+    Contact(String name) {
+        this.name = name;
+        phoneNumbers = new ArvVL<>();
+    }
+
+    public String editName(String novo) {
+        return name = novo;
+    }
+
+    public void addNumber(String number) {
         phoneNumbers.insert(number);
     }
 
-    public void getNumbers(){
+    public void getNumbers() {
         phoneNumbers.printInOrder();
     }
 
-    @Override
     public int compareTo(Contact o) {
         return name.compareTo(o.name);
     }
 
-    public String toString(){
-        return name;
+    public void nameString() {
+        System.out.println(name);
     }
 
-    public boolean contains(String number){
+    public boolean contains(String number) {
         return phoneNumbers.contains(number);
     }
 
+    public void removeNumber(String number) {
+        phoneNumbers.remove(number);
+    }
+
+    public void editNumber(String number, String newNumber) {
+        removeNumber(number);
+        addNumber(newNumber);
+    }
 }
+        

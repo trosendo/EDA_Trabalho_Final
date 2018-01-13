@@ -8,12 +8,12 @@ public class ArrayQueue<T> implements Queue<T> {
 
     public ArrayQueue(){
         array = (T[]) new Object[20];
-        maxSize = 20;
+        maxSize = 21;
     }
 
     public ArrayQueue(int n){
         array = (T[]) new Object[n];
-        maxSize = n;
+        maxSize = n + 1;
     }
 
     public void enqueue(T x) throws OverflowException{

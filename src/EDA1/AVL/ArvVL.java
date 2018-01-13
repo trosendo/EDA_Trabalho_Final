@@ -203,7 +203,7 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
 
         printInOrder(n.left);
 
-        System.out.print(n.element + " ");
+        System.out.print(n.element + "  ");
 
         printInOrder(n.right);
     }
