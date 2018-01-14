@@ -20,7 +20,7 @@ public class Tester {
                 "-> ";
         String nomeContacto = "Nome do Contacto: ";
         String numeroContacto = "Numero do Contacto: ";
-        String nomeOuNumero = "\t(1) Editar Nome\n\t(2) Editar Numero\n\t-> ";
+        String nomeOuNumero = "\t(1) Editar Nome\n\t(2) Editar Numero\n\t(3) Eliminar Numero\n\t-> ";
         String alterarNumero = "Numero a alterar: ";
 
         Phonebook test1 = new Phonebook();
@@ -52,13 +52,12 @@ public class Tester {
                 if (test1.contains(nome)) {
                     System.out.print(nomeOuNumero);
                     option = intScan.nextInt();
+                    Contact c = test1.getContact(nome);
                     if (option == 1) {
                         System.out.print("Novo " + nomeContacto);
                         String novoNome = stringScan.nextLine();
-                        Contact c = test1.getContact(nome);
                         c.editName(novoNome);
                     } else if (option == 2) {
-                        Contact c = test1.getContact(nome);
                         c.getNumbers();
                         System.out.print("\n" + alterarNumero);
                         String numeroVelho = stringScan.nextLine();
@@ -68,7 +67,16 @@ public class Tester {
                             c.editNumber(numeroVelho, novoNumero);
                         } else
                             System.out.printf("Numero %s não existe no contacto %s\n", numeroVelho, nome);
+                    } else if (option == 3) {
+                        c.getNumbers();
+                        System.out.print("\nNumero a Eliminar: ");
+                        String numeroVelho = stringScan.nextLine();
+                        if (c.contains(numeroVelho)) {
+                            c.removeNumber(numeroVelho);
+                        } else
+                            System.out.printf("Numero %s não existe no contacto %s\n", numeroVelho, nome);
                     }
+
                 } else {
                     System.out.println("Contacto inexistente!");
                 }
