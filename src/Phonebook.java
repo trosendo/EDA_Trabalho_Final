@@ -34,11 +34,12 @@ public class Phonebook {
     }
 
     public String getName(String number) {
+        String name_s = " - ";
         for(Contact c : phonebook) {
             if(c.contains(number))
-                return c.name;
+                name_s += c.name + "\n - ";
         }
-        return "Nenhum Contacto Encontrado";
+        return (name_s.length() > 3) ? name_s.substring(0, name_s.length() - 4) : "Nenhum Contacto Encontrado";
     }
 /*
     public void insertIntoExisting(String name, String number) {

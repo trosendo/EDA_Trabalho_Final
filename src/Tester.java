@@ -71,7 +71,7 @@ public class Tester {
             } else if(option == 4) {
                 System.out.print(numeroContacto);
                 String numero = stringScan.nextLine();
-                System.out.printf("Contacto associado a %s: %s\n", numero, test1.getName(numero));
+                System.out.printf("Contacto associado a %s:\n%s\n", numero, test1.getName(numero));
             } else if(option == 5) {
                 ArrayQueue<Contact> queue;
                 boolean exported = true;
@@ -82,6 +82,13 @@ public class Tester {
                     exported = false;
                 }
                 System.out.printf("Exportação %s sucedida (%d Contactos Exportados)\n", exported ? "bem" : "mal", test1.getSize());
+            } else if(option == 6) {
+                test1.order();
+                System.out.print(nomeContacto);
+                String nome = stringScan.nextLine();
+                test1.remove(nome);
+                if(!test1.contains(nome))
+                    System.out.println("Contacto removido com sucesso");
             }
         } while (option != 0);
     }

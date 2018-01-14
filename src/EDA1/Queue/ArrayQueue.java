@@ -8,7 +8,7 @@ public class ArrayQueue<T> implements Queue<T> {
 
     public ArrayQueue(){
         array = (T[]) new Object[20];
-        maxSize = 21;
+        maxSize = 20 + 1;
     }
 
     public ArrayQueue(int n){
