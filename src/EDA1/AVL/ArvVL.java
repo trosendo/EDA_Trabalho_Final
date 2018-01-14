@@ -79,7 +79,7 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
 
     @Override
     public void insert(T x) {
-        System.out.println("Inserting " + x);
+        //System.out.println("Inserting " + x);
         root = insert(x, root);
         size++;
     }
@@ -247,7 +247,7 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
 
 
     private AVLNode<T> simpleRightRotation(AVLNode<T> n0) {
-        System.out.println("Rotacao dir");
+        //System.out.println("Rotacao dir");
         AVLNode<T> n1 = n0.left;
         n0.left = n1.right;
         n1.right = n0;
@@ -259,7 +259,7 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
     }
 
     private AVLNode<T> simpleLeftRotation(AVLNode<T> n0) {
-        System.out.println("Rotacao esq");
+        //System.out.println("Rotacao esq");
         AVLNode<T> n1 = n0.right;
         n0.right = n1.left;
         n1.left = n0;
@@ -271,7 +271,7 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
     }
 
     private AVLNode<T> rightLeftRotation(AVLNode<T> n0) {
-        System.out.println("Rotaçao dupla dir esq");
+        //System.out.println("Rotaçao dupla dir esq");
         AVLNode<T> n1 = n0.right;
         n0.right = simpleRightRotation(n1);
 
@@ -282,7 +282,7 @@ public class ArvVL<T extends Comparable<? super T>> implements Iterable<T>, AVL<
     }
 
     private AVLNode<T> leftRightRotation(AVLNode<T> n0) {
-        System.out.println("Rotaçao dupla esq dir");
+        //System.out.println("Rotaçao dupla esq dir");
         AVLNode<T> n1 = n0.left;
         n0.left = simpleLeftRotation(n1);
 

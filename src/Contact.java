@@ -30,10 +30,6 @@ public class Contact implements Comparable<Contact> {
         return name.compareTo(o.name);
     }
 
-    public void nameString() {
-        System.out.println(name);
-    }
-
     public boolean contains(String number) {
         return phoneNumbers.contains(number);
     }
