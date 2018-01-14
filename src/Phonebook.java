@@ -22,6 +22,28 @@ public class Phonebook {
     public void insert(Contact contact) {
         phonebook.insert(contact);
         size++;
+        System.out.println("Contacto Adicionado com Sucesso!");
+    }
+
+    public void insertIntoExisting(String name, String number) {
+        boolean inserted = false;
+        boolean existsButNotAdded = false;
+        for(Contact c : phonebook){
+            if(c.name.equals(name)){
+                if(c.contains(number)) {
+                    System.out.printf("Contacto %s ja tem %s nos seus numeros\n", name, number);
+                    existsButNotAdded = true;
+                    break;
+                }
+                c.addNumber(number);
+                inserted = true;
+                break;
+            }
+        }
+        if(inserted)
+            System.out.printf("Numero %s adicionado com sucesso a %s \n", number, name);
+        else if (!existsButNotAdded)
+            System.out.printf("Contacto %s inexistente!\n", name);
     }
 
     public Contact getContact(String name) {
@@ -39,7 +61,7 @@ public class Phonebook {
             if (c.contains(number))
                 name_s += c.name + "\n - ";
         }
-        return (name_s.length() > 3) ? name_s.substring(0, name_s.length() - 4) : "Nenhum Contacto Encontrado";
+        return (name_s.length() > 3) ? name_s.substring(0, name_s.length() - 4) : "Nenhum Contacto Encontrado!";
     }
 
     public void remove(String name) {
@@ -47,11 +69,10 @@ public class Phonebook {
             if (c.name.equals(name)) {
                 phonebook.remove(new Contact(name));
                 size--;
-                System.out.printf("Contact %s successfully removed from contacts\n", name);
                 return;
             }
         }
-        System.out.printf("Contact %s doesn't exists!\n", name);
+        System.out.printf("Contacto %s inexistente!\n", name);
     }
 
     public void getNumbers(String name) {
@@ -61,7 +82,7 @@ public class Phonebook {
                 return;
             }
         }
-        System.out.printf("Contact %s doesn't exists!\n", name);
+        System.out.printf("Contacto %s inexistente!\n", name);
     }
 
     public void order() {

@@ -15,6 +15,7 @@ public class Tester {
                 "(4) - Procurar Telefone\n" +
                 "(5) - Exportar para Queue\n" +
                 "(6) - Remover Contacto\n" +
+                "(7) - Adicionar Telefone a Contacto\n" +
                 "(0) - Sair\n" +
                 "-> ";
         String nomeContacto = "Nome do Contacto: ";
@@ -32,12 +33,15 @@ public class Tester {
             if (option == 1) {
                 System.out.print(nomeContacto);
                 String nome = stringScan.nextLine();
+                System.out.print(numeroContacto);
+                String numero = stringScan.nextLine();
                 if (!test1.contains(nome)) {
-                    System.out.print(numeroContacto);
-                    String numero = stringScan.nextLine();
                     test1.insert(new Contact(nome, numero));
                 } else {
-                    System.out.println("Contact already exist");
+                    System.out.printf("Contacto ja existe. Deseja adicionar %s a %s [Y/N(default)]? ", numero, nome);
+                    String op = stringScan.nextLine();
+                    if(op.equalsIgnoreCase("Y"))
+                        test1.insertIntoExisting(nome, numero);
                 }
             } else if (option == 2) {
                 test1.order();
@@ -66,7 +70,7 @@ public class Tester {
                             System.out.printf("Numero %s não existe no contacto %s\n", numeroVelho, nome);
                     }
                 } else {
-                    System.out.println("Contact doesn't exist");
+                    System.out.println("Contacto inexistente!");
                 }
             } else if (option == 4) {
                 System.out.print(numeroContacto);
@@ -89,6 +93,13 @@ public class Tester {
                 test1.remove(nome);
                 if (!test1.contains(nome))
                     System.out.println("Contacto removido com sucesso");
+            } else if (option == 7) {
+                test1.order();
+                System.out.print(nomeContacto);
+                String nome = stringScan.nextLine();
+                System.out.print(numeroContacto);
+                String numero = stringScan.nextLine();
+                test1.insertIntoExisting(nome, numero);
             }
         } while (option != 0);
     }
