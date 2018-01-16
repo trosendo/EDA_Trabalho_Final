@@ -26,24 +26,18 @@ public class Phonebook {
     }
 
     public void insertIntoExisting(String name, String number) {
-        boolean inserted = false;
-        boolean existsButNotAdded = false;
-        for(Contact c : phonebook){
-            if(c.name.equals(name)){
-                if(c.contains(number)) {
-                    System.out.printf("Contacto %s ja tem %s nos seus numeros\n", name, number);
-                    existsButNotAdded = true;
-                    break;
-                }
-                c.addNumber(number);
-                inserted = true;
-                break;
-            }
-        }
-        if(inserted)
-            System.out.printf("Numero %s adicionado com sucesso a %s \n", number, name);
-        else if (!existsButNotAdded)
+        Contact c = getContact(name);
+        if(c == null){
             System.out.printf("Contacto %s inexistente!\n", name);
+            return;
+        }
+        boolean inserted = false;
+        if(c.contains(number)) {
+            System.out.printf("Contacto %s ja tem %s nos seus numeros\n", name, number);
+            return;
+        }
+        c.addNumber(number);
+        System.out.printf("Numero %s adicionado com sucesso a %s \n", number, name);
     }
 
     public Contact getContact(String name) {
