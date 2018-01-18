@@ -56,7 +56,9 @@ public class Tester {
                     if (option == 1) {
                         System.out.print("Novo " + nomeContacto);
                         String novoNome = stringScan.nextLine();
+                        //test1.remove(c.name);
                         c.editName(novoNome);
+                        //test1.insert(c);
                     } else if (option == 2) {
                         c.getNumbers();
                         System.out.print("\n" + alterarNumero);
